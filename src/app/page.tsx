@@ -1,30 +1,19 @@
 import Image from "next/image";
-import ceej from "../../public/ceej.jpg";
-import ceej2 from "../../public/ceej2.jpg";
+import ceej from "/public/ceej.jpg";
+import ceej2 from "/public/ceej2.jpg";
 import Card from "@/components/card";
 import Twitter from "@/components/twitter";
 import Balancer from "react-wrap-balancer";
-import matter from "gray-matter";
 import { getAllPosts } from "@/lib/getPosts";
 
 type Post = {
   slug: string;
   title: string;
-  date: string;
-  coverImage: string;
-  excerpt: string;
-  ogImage: {
-    url: string;
-  };
   content: string;
 };
 
-type Props = {
-  allPosts: Post[];
-};
-
 export default function Page() {
-  const allPosts = getAllPosts(["title", "slug", "content"]);
+  const allPosts = getAllPosts(["title", "slug", "content"]) as Post[];
 
   return (
     <div className="w-full space-y-5 p-4">
