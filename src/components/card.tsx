@@ -1,6 +1,7 @@
 import ReactMarkdown from "react-markdown";
 import Image, { StaticImageData } from "next/image";
 import Balancer from "react-wrap-balancer";
+import { join, sep } from "path";
 
 export default function Card({
   title,
@@ -10,7 +11,7 @@ export default function Card({
 }: {
   title: string;
   description: string;
-  image: StaticImageData;
+  image: string;
   large?: boolean;
 }) {
   return (
@@ -51,14 +52,14 @@ export default function Card({
           </ReactMarkdown>
         </Balancer>
         {/* </div> */}
-        <div className="rounded-3xl">
+        <div className="fill flex justify-center rounded-3xl">
           <Image
-            src={image}
+            src={join(sep, image)}
             alt=""
             sizes="100vw"
+            width={300}
+            height={300}
             style={{
-              width: "100%",
-              height: "auto",
               borderRadius: "0.75rem",
             }}
           />

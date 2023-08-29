@@ -9,11 +9,19 @@ import { getAllPosts } from "@/lib/getPosts";
 type Post = {
   slug: string;
   title: string;
+  image: string;
   content: string;
 };
 
+const cardsDir = "cards";
+
 export default function Page() {
-  const allPosts = getAllPosts(["title", "slug", "content"]) as Post[];
+  const allCards = getAllPosts(cardsDir, [
+    "title",
+    "slug",
+    "content",
+    "image",
+  ]) as Post[];
 
   return (
     <div className="w-full space-y-5 p-4">
@@ -48,28 +56,16 @@ export default function Page() {
       </p>
 
       <div className="animate-fade-up flex w-full flex-col justify-center space-y-10 px-6 lg:px-72">
-        {features.map(({ title, description, image, large }) => (
+        {allCards.map(({ title, content, image }) => (
           <Card
             key={title}
             title={title}
-            description={description}
+            description={content}
             image={image}
-            large={large}
+            large={true}
           />
         ))}
-        <Card
-          key={allPosts[1].title}
-          title={allPosts[1].title}
-          description={allPosts[1].content}
-          image={ceej}
-          large={true}
-        />
       </div>
-      {allPosts.map((post) => (
-        <div key={post.slug}>
-          <p>{post.title}</p>
-        </div>
-      ))}
     </div>
   );
 }
